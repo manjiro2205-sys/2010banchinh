@@ -6,10 +6,8 @@
   <title>Sweet Wishes ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-   
     :root {
       --pink: #ffb6c1;
-      
       --lavender: #e6e6fa;
       --mint: #c7f0db;
       --yellow: #fff9d9;
@@ -119,7 +117,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* 💖 Nút tròn ở góc phải dưới */
     .circle-btn {
       position: fixed;
       bottom: 25px;
@@ -151,7 +148,6 @@
       background: var(--accent);
     }
 
-    /* Sidebar */
     .sidebar {
       position: fixed;
       top: 0;
@@ -203,24 +199,46 @@
 
     .close-slide:hover { background: var(--text-dark); }
 
-    .credit {
+    .wish-modal {
+      display: none;
       position: fixed;
-      bottom: 10px;
-      right: 15px;
-      font-size: 15px;
-      color: #444;
-      background: rgba(255,255,255,0.6);
-      padding: 5px 12px;
-      border-radius: 12px;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
       backdrop-filter: blur(5px);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wish-content {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 25px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 20px;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     @media (max-width: 768px) {
       .sidebar { width: 80%; right: -80%; }
       .sidebar.open { right: 0; }
+      .intro { font-size: 54px; }
+      .subtitle { font-size: 18px; }
     }
   </style>
- 
 </head>
 <body>
   <div class="particles" id="particles"></div>
@@ -234,12 +252,13 @@
       <input type="text" id="nameInput" placeholder="vd: nguyen vu huyen">
       <button onclick="showWish()">Xem lời chúc 🎀</button>
     </div>
-    <div class="error-message" id="errorMsg">Tên chưa có trong danh sách 😔 Hãy thử tên khác nhé!</div>
+    <div class="error-message" id="errorMsg" style="display:none; color:red; margin-top:15px;">
+      Tên chưa có trong danh sách 😔 Hãy thử tên khác nhé!
+    </div>
   </div>
-   <!-- 💖 Nút tròn mở sidebar -->
+
   <button class="circle-btn" id="slideBtn">💖</button>
 
-  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <button class="close-slide" onclick="toggleSidebar()">x</button>
     <h2>Lời Chúc 20/10 💖</h2>
@@ -248,23 +267,10 @@
       Chúc các bạn nữ cấp 3 một ngày 20/10 tràn đầy niềm vui, học giỏi và mãi là những cô gái rạng rỡ! 
       Ngày Phụ nữ Việt Nam, chúc bạn luôn có "chất xúc tác" là niềm vui, đạt "kết quả" thành công trong học tập! 
       20/10 vui vẻ nhé! Chúc bạn nữ xinh đẹp, tự tin chinh phục mọi thử thách ở trường và cuộc sống. 
-      Gửi đến bạn nữ thân yêu: Chúc ngày 20/10 hạnh phúc, học hành suôn sẻ và luôn tỏa sáng như ngôi sao lớp! 
     </p>
   </div>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const slideBtn = document.getElementById('slideBtn');
-
-    slideBtn.addEventListener('click', toggleSidebar);
-
-    function toggleSidebar() {
-      sidebar.classList.toggle('open');
-    }
-  </script>
-</body>
-</html>
-
+  <!-- Modal -->
   <div class="wish-modal" id="wishModal">
     <div class="wish-content">
       <h2 id="wishName">💖</h2>
@@ -273,72 +279,25 @@
     </div>
   </div>
 
-  
-
   <script>
+    const sidebar = document.getElementById('sidebar');
+    const slideBtn = document.getElementById('slideBtn');
+    slideBtn.addEventListener('click', toggleSidebar);
+    function toggleSidebar() { sidebar.classList.toggle('open'); }
+
     const wishes = {
-       "vu van nhat huy": "Chúc pi tơ bo sớm dài bằng châu phi",
-      "ngo thi thanh tu": "20/10 sức khỏe dồi dào, lun lun xinh đẹp, học giỏi, hạnh phúc, 8386. Happy women's day ❤️",
-
-"hoang minh thu": "Chúc bạn 20/10 vui vẻ, xinh đẹp, sớm tìm được nữa kia, mau ăn chống lớn 💕",
-
-"tran ha gia han": "Chúc bạn luôn mạnh mẽ, tự tin và tỏa sáng như bông hoa giữa nắng vàng ☀️",
-
-"nguyen cao bich nhan": "Chúc bạn ngày càng xinh hơn, đáng yêu hơn và luôn là niềm vui của cả lớp 🌈",
-
-"nguyen ho hoai an": " Chúc bạn luôn tươi tắn, rạng rỡ và là “spotlight” mọi lúc mọi nơi ✨",
-
-"nguyen minh hang": "20/10 vui vẻ nha! Chúc bạn xinh như công chúa, học giỏi như thiên tài và vui như trẻ con 🎉",
-
-"nguyen vu huyen": "Chúc bạn 20/10 thật chill, được ăn ngon, ngủ ngon và không bị gọi trả bài 😆",
-
-"nguyen mai hoang ngan": "20/10 vui vẻ nhe lớp trưởng, xinh đẹp hơn, mau ăn chống lớn càng lớn càng DAM DANG... ",
-
-"nguyen tran xuan nghi": "Chúc bạn 20/10 vui vỏe, sớm quay lại với người ấy để đi chơi noel :))))",
-
-"ly phan bao ngoc": "Chúc bạn luôn tự tin, bản lĩnh và tỏa sáng theo cách riêng của mình 🌈",
-
-"doan nguyen nha phuong": "Chúc bạn xinh như hoa, giỏi như Google và dễ thương như chính bạn bây giờ 💕",
-
-"huynh thi nhat quyen": "Chúc bạn ngày càng xinh đẹp, hạnh phúc và thành công – không chỉ hôm nay mà mãi mãi! 🥳",
-
-"duong to quynh": "Chúc bạn luôn rạng rỡ như ánh nắng ban mai và đáng yêu như kẹo ngọt 🍬",
-
-"tran thi thao": "Chúc bạn có một ngày 20/10 tràn ngập tiếng cười, hoa tươi, đồ ăn ngon và không một chút lo âu.",
-
-"tran thi thu thuy": "20/10 vui vẻ nha! Mong bạn luôn được yêu thương và trân trọng như chính bạn xứng đáng 🌹",
-
-"nguyen ngoc quynh tien": "20/10 chúc bạn càng ngày càng xinh đẹp, đáng yêu và luôn được mọi người yêu mến!",
-
-"huynh thi tuong vy": "Chúc bạn xinh như hoa, giỏi như Google và dễ thương như chính bạn bây giờ 💕",
-
-"tran thi bao yen": "Chúc “bông hoa đặc biệt” của lớp có một ngày tràn đầy niềm vui và lời chúc tốt đẹp nhất 🌷",
-"truong thi bich thuy":"Chúng em chúc cô 20/10 luôn mạnh khỏe hạnh phúc, ngày càng thành công trong con đường giáo dục, và luôn là một người lái đò dẫn dắt bọn em đến con đường tương lai phía trước, mong cô sẽ là người đồng hành dẫn đường chúng em suốt năm học 11 này.",
+      "nguyen vu huyen": "Chúc bạn 20/10 thật chill, được ăn ngon, ngủ ngon và không bị gọi trả bài 😆",
+      "ngo thi thanh tu": "20/10 sức khỏe dồi dào, lun lun xinh đẹp, học giỏi, hạnh phúc ❤️",
+      "tran thi thu thuy": "Mong bạn luôn được yêu thương và trân trọng như chính bạn xứng đáng 🌹"
     };
-
-    const particlesContainer = document.getElementById('particles');
-    const colors = ['var(--pink)', 'var(--lavender)', 'var(--mint)', 'var(--yellow)'];
-
-    for (let i = 0; i < 40; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.top = Math.random() * 100 + '%';
-      particle.style.width = (Math.random() * 20 + 5) + 'px';
-      particle.style.height = particle.style.width;
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-      particle.style.animationDelay = Math.random() * 20 + 's';
-      particle.style.animationDuration = (Math.random() * 25 + 15) + 's';
-      particlesContainer.appendChild(particle);
-    }
 
     function showWish() {
       const name = document.getElementById('nameInput').value.toLowerCase().trim();
       const error = document.getElementById('errorMsg');
       if (wishes[name]) {
-        document.getElementById('wishName').textContent = capitalize(name) + ' 🌸';
+        document.getElementById('wishName').textContent = capitalize(name);
         document.getElementById('wishText').textContent = wishes[name];
-        document.getElementById('wishModal').style.display = 'block';
+        document.getElementById('wishModal').style.display = 'flex';
         error.style.display = 'none';
       } else {
         error.style.display = 'block';
@@ -357,14 +316,6 @@
     document.getElementById('nameInput').addEventListener('keypress', e => {
       if (e.key === 'Enter') showWish();
     });
-    const sidebar = document.getElementById('sidebar');
-const slideBtn = document.getElementById('slideBtn');
-
-slideBtn.addEventListener('click', toggleSidebar);
-
-function toggleSidebar() {
-  sidebar.classList.toggle('open');
-}
   </script>
 </body>
 </html>

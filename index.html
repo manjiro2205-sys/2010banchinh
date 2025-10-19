@@ -6,6 +6,56 @@
   <title>Sweet Wishes ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    @media (max-width: 768px) {
+  .wish-content {
+    width: 90%;
+    max-width: 340px;
+    padding: 40px 25px;
+    font-size: 16px;
+  }
+
+  .wish-content h2 {
+    font-size: 28px;
+  }
+
+  .wish-content p {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  /* Sửa lỗi bị che hoặc tràn khi modal hiển thị */
+  .wish-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .wish-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    animation: none;
+  }
+
+  .slide-btn {
+    padding: 14px 10px;
+    font-size: 16px;
+  }
+
+  .sidebar {
+    width: 80%;
+    right: -80%;
+    padding: 40px 20px;
+    font-size: 18px;
+  }
+
+  .sidebar h2 {
+    font-size: 36px;
+  }
+}
     :root {
       --pink: #ffb6c1;
       --lavender: #e6e6fa;
@@ -43,7 +93,8 @@
       z-index: 0;
     }
 
-    .particles {
+    /* Floating pastel bubbles */
+    .particles, .sparkles {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -161,6 +212,21 @@
       box-shadow: 0 8px 25px rgba(255,105,180,0.5);
       transition: 0.4s ease;
     }
+   
+ 
+
+    .credit {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      font-size: 15px;
+      color: #444;
+      background: rgba(255,255,255,0.6);
+      padding: 5px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+    }
+
 
     @keyframes gradientMove {
       0% { background-position: 0% 50%; }
@@ -286,6 +352,7 @@
     <div class="error-message" id="errorMsg">Tên chưa có trong danh sách 😔 Hãy thử tên khác nhé!</div>
   </div>
 
+
   <div class="wish-modal" id="wishModal">
     <div class="wish-content">
       <h2 id="wishName">💖</h2>
@@ -300,14 +367,41 @@
     const wishes = {
        "vu van nhat huy": "Chúc pi tơ bo sớm dài bằng châu phi",
       "ngo thi thanh tu": "20/10 sức khỏe dồi dào, lun lun xinh đẹp, học giỏi, hạnh phúc, 8386. Happy women's day ❤️",
-      "hoang minh thu": "Chúc bạn 20/10 vui vẻ, xinh đẹp, sớm tìm được nữa kia, mau ăn chống lớn 💕",
-      "tran ha gia han": "Chúc bạn luôn mạnh mẽ, tự tin và tỏa sáng như bông hoa giữa nắng vàng ☀️",
-      "nguyen cao bich nhan": "Chúc bạn ngày càng xinh hơn, đáng yêu hơn và luôn là niềm vui của cả lớp 🌈",
-      "nguyen ho hoai an": "Chúc bạn luôn tươi tắn, rạng rỡ và là “spotlight” mọi lúc mọi nơi ✨",
-      "nguyen minh hang": "20/10 vui vẻ nha! Chúc bạn xinh như công chúa, học giỏi như thiên tài và vui như trẻ con 🎉",
-      "nguyen vu huyen": "Chúc bạn 20/10 thật chill, được ăn ngon, ngủ ngon và không bị gọi trả bài 😆",
-      "nguyen mai hoang ngan": "20/10 vui vẻ nhe lớp trưởng, xinh đẹp hơn, mau ăn chống lớn càng lớn càng DAM DANG...",
-      "truong thi bich thuy": "Chúng em chúc cô 20/10 luôn mạnh khỏe hạnh phúc, ngày càng thành công trong con đường giáo dục, và luôn là người lái đò dẫn dắt bọn em đến tương lai.",
+
+"hoang minh thu": "Chúc bạn 20/10 vui vẻ, xinh đẹp, sớm tìm được nữa kia, mau ăn chống lớn 💕",
+
+"tran ha gia han": "Chúc bạn luôn mạnh mẽ, tự tin và tỏa sáng như bông hoa giữa nắng vàng ☀️",
+
+"nguyen cao bich nhan": "Chúc bạn ngày càng xinh hơn, đáng yêu hơn và luôn là niềm vui của cả lớp 🌈",
+
+"nguyen ho hoai an": " Chúc bạn luôn tươi tắn, rạng rỡ và là “spotlight” mọi lúc mọi nơi ✨",
+
+"nguyen minh hang": "20/10 vui vẻ nha! Chúc bạn xinh như công chúa, học giỏi như thiên tài và vui như trẻ con 🎉",
+
+"nguyen vu huyen": "Chúc bạn 20/10 thật chill, được ăn ngon, ngủ ngon và không bị gọi trả bài 😆",
+
+"nguyen mai hoang ngan": "20/10 vui vẻ nhe lớp trưởng, xinh đẹp hơn, mau ăn chống lớn càng lớn càng DAM DANG... ",
+
+"nguyen tran xuan nghi": "Chúc bạn 20/10 vui vỏe, sớm quay lại với người ấy để đi chơi noel :))))",
+
+"ly phan bao ngoc": "Chúc bạn luôn tự tin, bản lĩnh và tỏa sáng theo cách riêng của mình 🌈",
+
+"doan nguyen nha phuong": "Chúc bạn xinh như hoa, giỏi như Google và dễ thương như chính bạn bây giờ 💕",
+
+"huynh thi nhat quyen": "Chúc bạn ngày càng xinh đẹp, hạnh phúc và thành công – không chỉ hôm nay mà mãi mãi! 🥳",
+
+"duong to quynh": "Chúc bạn luôn rạng rỡ như ánh nắng ban mai và đáng yêu như kẹo ngọt 🍬",
+
+"tran thi thao": "Chúc bạn có một ngày 20/10 tràn ngập tiếng cười, hoa tươi, đồ ăn ngon và không một chút lo âu.",
+
+"tran thi thu thuy": "20/10 vui vẻ nha! Mong bạn luôn được yêu thương và trân trọng như chính bạn xứng đáng 🌹",
+
+"nguyen ngoc quynh tien": "20/10 chúc bạn càng ngày càng xinh đẹp, đáng yêu và luôn được mọi người yêu mến!",
+
+"huynh thi tuong vy": "Chúc bạn xinh như hoa, giỏi như Google và dễ thương như chính bạn bây giờ 💕",
+
+"tran thi bao yen": "Chúc “bông hoa đặc biệt” của lớp có một ngày tràn đầy niềm vui và lời chúc tốt đẹp nhất 🌷",
+"truong thi bich thuy":"Chúng em chúc cô 20/10 luôn mạnh khỏe hạnh phúc, ngày càng thành công trong con đường giáo dục, và luôn là một người lái đò dẫn dắt bọn em đến con đường tương lai phía trước, mong cô sẽ là người đồng hành dẫn đường chúng em suốt năm học 11 này.",
     };
 
     const particlesContainer = document.getElementById('particles');
@@ -351,6 +445,14 @@
     document.getElementById('nameInput').addEventListener('keypress', e => {
       if (e.key === 'Enter') showWish();
     });
+    const sidebar = document.getElementById('sidebar');
+const slideBtn = document.getElementById('slideBtn');
+
+slideBtn.addEventListener('click', toggleSidebar);
+
+function toggleSidebar() {
+  sidebar.classList.toggle('open');
+}
   </script>
 </body>
 </html>

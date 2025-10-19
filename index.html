@@ -6,56 +6,8 @@
   <title>Sweet Wishes ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    @media (max-width: 768px) {
-  .wish-content {
-    width: 90%;
-    max-width: 340px;
-    padding: 40px 25px;
-    font-size: 16px;
-  }
+   
 
-  .wish-content h2 {
-    font-size: 28px;
-  }
-
-  .wish-content p {
-    font-size: 16px;
-    margin-bottom: 30px;
-  }
-
-  /* Sửa lỗi bị che hoặc tràn khi modal hiển thị */
-  .wish-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-    padding: 20px;
-  }
-
-  .wish-content {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    animation: none;
-  }
-
-  .slide-btn {
-    padding: 14px 10px;
-    font-size: 16px;
-  }
-
-  .sidebar {
-    width: 80%;
-    right: -80%;
-    padding: 40px 20px;
-    font-size: 18px;
-  }
-
-  .sidebar h2 {
-    font-size: 36px;
-  }
-}
     :root {
       --pink: #ffb6c1;
       --lavender: #e6e6fa;
@@ -198,20 +150,7 @@
       background: var(--yellow);
     }
 
-    button {
-      padding: 15px 35px;
-      font-size: 18px;
-      font-weight: 700;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      color: var(--text-light);
-      background: linear-gradient(120deg, var(--accent), var(--pink), var(--lavender));
-      background-size: 300% 300%;
-      animation: gradientMove 5s ease infinite;
-      box-shadow: 0 8px 25px rgba(255,105,180,0.5);
-      transition: 0.4s ease;
-    }
+ 
    
  
 
@@ -232,11 +171,6 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-    }
-
-    button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(255,105,180,0.6);
     }
 
     .wish-modal {
@@ -285,21 +219,7 @@
       margin-bottom: 40px;
     }
 
-    .close-btn {
-      background: linear-gradient(120deg, var(--lavender), var(--mint));
-      border: 2px solid var(--text-dark);
-      color: var(--text-dark);
-      border-radius: 25px;
-      padding: 12px 30px;
-      font-size: 16px;
-      transition: 0.3s ease;
-      cursor: pointer;
-    }
-
-    .close-btn:hover {
-      background: var(--lavender);
-      transform: translateY(-2px);
-    }
+   
 
     .error-message {
       display: none;
